@@ -326,14 +326,14 @@ Node* MakeExpressionTree(Stack* postfixExpressionStack) {
 }
 
 // WIP: OBSOLETE // DUE TO CANT IMPLEMENT ㅋㅋ
-Node* MakeExpressionTreeFromInfix(Stack* parsedInfixExpression) {
-	Node* tempRoot = NULL;
-	while (!IsStackEmpty(parsedInfixExpression))
-	{
-		char* token = PopStack(parsedInfixExpression);
-		if (isdigit(token[0]) != 0) {
-
-		}
-	}
-	return;
-}
+//Node* MakeExpressionTreeFromInfix(Stack* parsedInfixExpression) {
+//	Node* tempRoot = NULL;
+//	while (!IsStackEmpty(parsedInfixExpression))
+//	{
+//		char* token = PopStack(parsedInfixExpression);
+//		if (isdigit(token[0]) != 0) {
+//
+//		}
+//	}
+//	return;
+//}
