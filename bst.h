@@ -33,5 +33,6 @@ char* CorrectExpression(char* expression);
 Stack* ParseExpression(char* expression);
 Stack* InfixToPostfix(Stack* input);
 Node* MakeExpressionTree(Stack* postfixExpressionStack);
+Node* MakeExpressionTreeFromInfix(Stack* infixExpressionStack);
 
 #endif

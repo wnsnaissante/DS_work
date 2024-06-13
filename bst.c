@@ -125,6 +125,9 @@ int GetOperatorPriority(char op) {
 	else if (op == '(' || op==')') {
 		return 4;
 	}
+	else {
+		return 0;
+	}
 }
 int GetOperatorPriorityInStack(char op) {
 	if (op == '(') {
@@ -151,13 +154,12 @@ int IsBracket(char op) {
 
 //!DONE : 괄호 짝 확인
 //!DONE : 연산자,숫자,괄호로만 돼있는지 확인
-//
-//!TODO : 수식 올바른지 확인 | 꼭 해야함
+//!DONE : 수식 올바른지 확인
 //!TODO: 좀 더 깔끔하게 정리하기 | 안되면말고
 int CheckValidateExpression(char* expression) {
 	int bracketCount = 0;
 	int lengthOfExpression = strlen(expression);
-	
+	int operandCount = 0; int operatorCount = 0;
 	for (int i = 0; i < lengthOfExpression; i++) {
 		if (expression[i] == '(') {
 			bracketCount += 1;
@@ -170,13 +172,29 @@ int CheckValidateExpression(char* expression) {
 	{
 		return 0;
 	}
-
 	for (int i = 0; i < lengthOfExpression; i++)
 	{
 		if ((IsOperator(expression[i]) || isdigit(expression[i]) || IsBracket(expression[i])) != 1)
 		{
 			return 0;
 		}
+	}
+	for (int i = 0; i < lengthOfExpression; i++) {
+		if (isdigit(expression[i])!=0)
+		{
+			operandCount++;
+			while (isdigit(expression[i])!=0) {
+				i++;
+			}
+		}
+		if (IsOperator(expression[i]) == 1)
+		{
+			operatorCount++;
+		}
+	}
+	if (operandCount != operatorCount + 1)
+	{
+		return 0;
 	}
 	return 1;
 }
@@ -212,7 +230,7 @@ char* CorrectExpression(char* expression) {
 }
 
 Stack* ParseExpression(char* expression) {
-	char temp[1024];
+	char temp[12];
 	Stack* parsedExpressionStack = InitStack();
 	int currentIndex = 0;
 	int tempIndex = 0;
@@ -244,13 +262,11 @@ Stack* ParseExpression(char* expression) {
 	return parsedExpressionStack;
 }
 
+// WIP: this will be DEPRECATED
 Stack* InfixToPostfix(Stack* inputParsedExpressionStack) {
 	Stack* ExpressionStack = inputParsedExpressionStack;
-
 	ExpressionStack = ReverseStack(ExpressionStack);
-
 	Stack* tempStack = InitStack();
-
 	Stack* resultStack = InitStack();
 	while (IsStackEmpty(ExpressionStack) != 1)
 	{
@@ -272,12 +288,10 @@ Stack* InfixToPostfix(Stack* inputParsedExpressionStack) {
 				PushStack(tempStack, currentToken);
 			}
 		}
-		else if ((currentToken[0]) == '(')
-		{
+		else if ((currentToken[0]) == '(') {
 			PushStack(tempStack, currentToken);
 		}
-		else if ((currentToken[0]) == ')')
-		{
+		else if ((currentToken[0]) == ')') {
 			while (IsStackEmpty(tempStack) != 1 && TopStack(tempStack)[0] != '(') {
 				PushStack(resultStack, PopStack(tempStack));
 			}
@@ -286,14 +300,13 @@ Stack* InfixToPostfix(Stack* inputParsedExpressionStack) {
 			}
 		}
 	}
-	while (IsStackEmpty(tempStack) != 1)
-	{
+	while (IsStackEmpty(tempStack) != 1) {
 		PushStack(resultStack, PopStack(tempStack));
 	}
 	resultStack = ReverseStack(resultStack);
 	return resultStack;
 }	  
-
+// WIP: this will be DEPRECATED
 Node* MakeExpressionTree(Stack* postfixExpressionStack) {
 	NodeStack* postfixExpressionNodeStack = InitNodeStack();
 	while (IsStackEmpty(postfixExpressionStack) != 1)
@@ -302,15 +315,25 @@ Node* MakeExpressionTree(Stack* postfixExpressionStack) {
 		if (currentTokenNode->typeOfData == 1) {
 			PushNodeStack(postfixExpressionNodeStack, currentTokenNode);
 		}
-		else
-		{
+		else {
 			Node* tempRChild = PopNodeStack(postfixExpressionNodeStack);
 			Node* tempLChild = PopNodeStack(postfixExpressionNodeStack);
-			currentTokenNode->rChild = tempRChild;
-			currentTokenNode->lChild = tempLChild;
+			currentTokenNode->rChild = tempRChild; currentTokenNode->lChild = tempLChild;
 			PushNodeStack(postfixExpressionNodeStack, currentTokenNode);
-			
 		}
 	}
 	return PopNodeStack(postfixExpressionNodeStack);
+}
+
+// WIP: OBSOLETE // DUE TO CANT IMPLEMENT ㅋㅋ
+Node* MakeExpressionTreeFromInfix(Stack* parsedInfixExpression) {
+	Node* tempRoot = NULL;
+	while (!IsStackEmpty(parsedInfixExpression))
+	{
+		char* token = PopStack(parsedInfixExpression);
+		if (isdigit(token[0]) != 0) {
+
+		}
+	}
+	return;
 }

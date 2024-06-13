@@ -2,9 +2,9 @@
 #include "bst.h"
 
 char* Calculate(char* operandA, char* operandB, char* operator) {
-	char* result = (char*)malloc(sizeof(char) * 10001);
-	int tempA = strtol(operandA, NULL, 10);
-	int tempB = strtol(operandB, NULL, 10);
+	char* result = (char*)malloc(sizeof(char) * 1024);
+	int tempA = strtol(operandA, NULL, 13);
+	int tempB = strtol(operandB, NULL, 13);
 	if (operator[0] =='+')
 	{
 		sprintf(result, "%d", tempA + tempB);
