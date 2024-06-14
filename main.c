@@ -1,6 +1,19 @@
 #include "bst.h"
 #include "calc.h"
 
+/*
+	Tested On :
+				1. Windows 10(11), gcc (MinGW.org GCC-6.3.0-1) 6.3.0
+
+				2. Ubuntu-22.04LTS, gcc 11.3.0-1ubuntu1~22.04.1 11.3.0
+								  Ubuntu clang version 14.0.0-1ubuntu1.1
+								  Target: x86_64-pc-linux-gnu
+								  Thread model: posix
+
+				3. macOS Sonoma 14.5, Apple clang version 15.0.0 (clang-1500.3.9.4)
+									Target: x86_64-apple-darwin23.5.0
+									Thread model: posix
+*/	
 
 //!TODO : 메모리 누수 고치기 || 못 고칠듯
 //!TODO : 파싱함수, 파싱된수식으로 포스트픽스 만드는거 없애고 바로 인픽스에서 트리만드는거로 수정하기
