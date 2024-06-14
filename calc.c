@@ -36,7 +36,6 @@ char* Calculate(char* operandA, char* operandB, char* operator) {
 		}
 		sprintf(result, "%d", (int)pow(tempA,tempB));
 	}
-
 	strcat(result, "\0");
 	return result;
 }

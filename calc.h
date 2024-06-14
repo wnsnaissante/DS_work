@@ -8,5 +8,4 @@
 char* Calculate(char* operandA, char* operandB, char* operator);
 char* ExecuteOperation(Node* node);
 
-
 #endif

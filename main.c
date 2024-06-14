@@ -35,7 +35,6 @@ void main(void) {
 				Stack* stack = ParseExpression(correctExpression);
 				stack = InfixToPostfix(stack);
 				Node* root = MakeExpressionTree(stack);
-				//Node* root = MakeExpressionTreeFromInfix(stack);
 				if (ExecuteOperation(root)[0] == 'M')
 				{
 					printf("Modulo by zero\n");
